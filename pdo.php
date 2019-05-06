@@ -43,8 +43,8 @@
 
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
       $query2 = $grill->prepare( "INSERT INTO `klienci` (`id`,`title`) VALUES ( NULL, :title )" );    // metoda prepare() pozwala wysłąć do bazy danych szkielet zapytania który będzie wykorzystywany później (w szkielecie można w miejsce wartości dodać placeholdery ?, lub :nazwa)
-      for ($i=0; $i < 4; $i++) {
-        $query2->bindValue(':title','ŁO JAPIERDOLE', PDO::PARAM_STR);      // przed wykonaniem polecenia można placeholdery zastąpić włąściwymi wartościami użytwając bindValue(nazwa placeholdera, wartość, oczekiwany typ zmiennej (PDO::PARAM_typ))
+      for ($i=0; $i < 1; $i++) {
+        $query2->bindValue(':title', 'lł eę oó', PDO::PARAM_STR);      // przed wykonaniem polecenia można placeholdery zastąpić włąściwymi wartościami użytwając bindValue(nazwa placeholdera, wartość, oczekiwany typ zmiennej (PDO::PARAM_typ))
 
         $wynik = ($query2->execute() > 0) ? 'dodano jakieś rekordziki zajebiśćie szybko w chuj' : 'no nie dodano ;-;';    // metoda execute() wykonuje spreparowane polecenie (działa podobnie jak np exec czy query)
       }      // oczywista zaleta takiej konstrukcji - szkielet tworzony jest raz a wartości wysyłane są kilkuktronie - szybkość x 1000
