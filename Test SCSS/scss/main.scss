@@ -1,0 +1,64 @@
+/* test zmiennych  */
+$fs: 50px;
+$color: #f0f;
+$ff: Helvetica, sans-serif;
+$bg: #0f0;
+
+h1{
+  font-family: $ff;
+  font-size: $fs;
+  color:$color;
+}
+
+.lelo{
+  background: $bg;
+  height: 100px;
+  width: 200px;
+}
+
+/* test zagnieżdżania */
+
+header{
+  width: 500px;
+
+  .linki{
+    background: $bg;
+
+    .nawigacja{
+      text-align: center;
+      font-size: 60px;
+
+      .onet{
+        text-decoration: none;
+
+      }
+    }
+  }
+}
+
+/* test ampersanda */
+.amp{
+  color:$color;
+  &:hover{
+    color: #f00;
+  }
+}
+
+/* test ampersanda (child) */
+.rodzic{
+  width: 200px;
+  height: 200px;
+  background: #00f;
+
+  .dziecko{
+    background: #f0f;
+    font-size: 20px;
+  }
+
+  &:hover{
+    & > .dziecko{
+      color: #f00;
+      background: #ff0;
+    }
+  }
+}
