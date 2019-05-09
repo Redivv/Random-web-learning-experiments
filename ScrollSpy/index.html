@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <!-- Boostrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <style media="screen">
+    #navigation {
+    position: fixed;
+  }
+  #sections {
+      position: absolute;
+      left: 150px;
+  }
+  .section {
+      height: 200px;
+      margin: 10px;
+      padding: 10px;
+      border: 1px dashed black;
+  }
+  #section5 {
+      height: 1000px;
+  }
+  .active {
+      background: red;
+  }
+
+  </style>
+</head>
+<body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<div id="navigation">
+    <ul>
+        <li><a href="#section1">Section 1</a></li>
+        <li><a href="#section2">Section 2</a></li>
+        <li><a href="#section3">Section 3</a></li>
+        <li><a href="#section4">Section 4</a></li>
+        <li><a href="#section5">Section 5</a></li>
+    </ul>
+</div>
+<div id="sections">
+    <div id="section1" class="section">
+        I'm section 1
+    </div>
+    <div id="section2" class="section">
+        I'm section 2
+    </div>
+    <div id="section3" class="section">
+        I'm section 3
+    </div>
+    <div id="section4" class="section">
+        I'm section 4
+    </div>
+    <div id="section5" class="section">
+        I'm section 5
+    </div>
+</div>
+
+  <!-- Jquery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+  <!-- Popper.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
+  <!-- Boostrap Js -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+  <script type="text/javascript">
+    // cache the navigation links
+var $navigationLinks = $('#navigation > ul > li > a');
+// cache (in reversed order) the sections
+var $sections = $($(".section").get().reverse());
+
+// map each section id to their corresponding navigation link
+var sectionIdTonavigationLink = {};
+$sections.each(function() {
+  var id = $(this).attr('id');
+  sectionIdTonavigationLink[id] = $('#navigation > ul > li > a[href=\\#' + id + ']');
+});
+
+// throttle function, enforces a minimum time interval
+function throttle(fn, interval) {
+  var lastCall, timeoutId;
+  return function () {
+      var now = new Date().getTime();
+      if (lastCall && now < (lastCall + interval) ) {
+          // if we are inside the interval we wait
+          clearTimeout(timeoutId);
+          timeoutId = setTimeout(function () {
+              lastCall = now;
+              fn.call();
+          }, interval - (now - lastCall) );
+      } else {
+          // otherwise, we directly call the function
+          lastCall = now;
+          fn.call();
+      }
+  };
+}
+
+function highlightNavigation() {
+  // get the current vertical position of the scroll bar
+  var scrollPosition = $(window).scrollTop();
+
+  // iterate the sections
+  $sections.each(function() {
+      var currentSection = $(this);
+      // get the position of the section
+      var sectionTop = currentSection.offset().top;
+
+      // if the user has scrolled over the top of the section
+      if (scrollPosition >= sectionTop) {
+          // get the section id
+          var id = currentSection.attr('id');
+          // get the corresponding navigation link
+          var $navigationLink = sectionIdTonavigationLink[id];
+          // if the link is not active
+          if (!$navigationLink.hasClass('active')) {
+              // remove .active class from all the links
+              $navigationLinks.removeClass('active');
+              // add .active class to the current link
+              $navigationLink.addClass('active');
+          }
+          // we have found our section, so we return false to exit the each loop
+          return false;
+      }
+  });
+}
+
+$(window).scroll( throttle(highlightNavigation,100) );
+
+// if you don't want to throttle the function use this instead:
+// $(window).scroll( highlightNavigation );
+  </script>
+</body>
+</html>
