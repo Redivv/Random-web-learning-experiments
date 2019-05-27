@@ -1,5 +1,5 @@
 <?php
-  include('connect.php');
+  include('../includes/connect.php');
 
   // Processing Ajax Request
   if(isset($_POST['view'])){  // Changing comment status to 1 - seen, no notifications, display

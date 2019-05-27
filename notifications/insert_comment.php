@@ -1,7 +1,7 @@
 <?php
 if(isset($_POST["subject"])){
 
-include("connect.php");
+include("../includes/connect.php");
 
 $subject = mysqli_real_escape_string($con, $_POST["subject"]);
 $comment = mysqli_real_escape_string($con, $_POST["comment"]);
