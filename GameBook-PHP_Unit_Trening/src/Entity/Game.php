@@ -6,6 +6,12 @@ class Game
     protected $imagePath;
     protected $rating;
 
+    public function isRecommended(object $user)
+    {
+        $compatibility = $user->getGenreCompatibility($this->getGenreCode());
+        return ($this->getAvarageScore() / 10 * $compatibility >= 3);     // normalnie zapisany warunek - zwraca true albo false
+    }
+
     public function getTitle()
     {
         return $this->title;
@@ -18,21 +24,45 @@ class Game
 
     public function getImagePath()
     {
+        if ($this->imagePath === null) {
+            return '/images/placeholder.jpg';
+        }
         return $this->imagePath;
     }
 
-    public function setImagePath($value)
+    public function setImagePath( ?string $value)
     {
         $this->imagePath = $value;
     }
 
-    public function getRating()
+    public function getRatings()
     {
         return $this->rating;
     }
 
-    public function setRating(float $value)
+    public function setRatings(array $value)
     {
         $this->rating = $value;
+    }
+
+    public function getAvarageScore()
+    {
+        $ratings = $this->getRatings();
+        $numRatings = count($ratings);
+
+        if ($numRatings <= 0) {
+            return null;
+        }
+
+        $total = 0;
+        foreach ($ratings as $rating) {
+            $score = $rating->getScore();
+            if ($score === null) {
+                $numRatings --;
+                continue;
+            }
+            $total += $score;
+        }
+        return $total / $numRatings;
     }
 }
