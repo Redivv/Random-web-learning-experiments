@@ -65,4 +65,17 @@ class Game
         }
         return $total / $numRatings;
     }
+
+    public function toArray()
+    {
+        $array = [
+            'title' => $this->title,
+            'imagePath' => $this->imagePath,
+            'ratings' => [],
+        ];
+        foreach ($this->getRatings() as $rating) {
+            $array['ratings'][] = $rating->toArray();
+        }
+        return $array;
+    }
 }

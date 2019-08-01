@@ -21,8 +21,7 @@ class UserTest extends TestCase
                         ->getMock();
         $rating2->method('getScore')->willReturn(8);
         
-        $user = $this->getMockBuilder('lack')
-                     ->setMockClassName('User')
+        $user = $this->getMockBuilder(User::class)
                      ->setMethods(['findRatingsByGenre'])
                      ->getMock();
         $user->method('findRatingsByGenre')->willReturn([$rating1,$rating2]);
