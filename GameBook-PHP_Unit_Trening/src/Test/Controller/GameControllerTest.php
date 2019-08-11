@@ -1,12 +1,28 @@
 <?php
 
-require __DIR__ . '/../../../vendor/autoload.php';
 use Goutte\Client;
 use GuzzleHttp\Client as ClientG;
 use PHPUnit\Framework\TestCase;
 
 class GameControllerTest extends TestCase
 {
+    public function setUp() : void          // setUp to funkcja która wykonuje się przed każdym testem dlatego można jej np użyć do restartu bazydanych
+    {
+        $mysql_host = "localhost";
+        $mysql_user = "wipaka_rajczogli";
+        $mysql_password = "kauczuk1";
+        # MySQL with PDO_MYSQL  
+        $db = new PDO("mysql:host=$mysql_host", $mysql_user, $mysql_password);
+
+        $query = file_get_contents(__DIR__."/../fixture.sql");
+        $stmt = $db->prepare($query);
+        $stmt->execute();
+    }
+
+    public function setUpBeforeClass()      // podobna do powyższej, ale ta wykonuje się przed pierwszym testem, zwykły prze każdym
+    {
+
+    }
     public function testIndex_Has6UlWithLi()
     {
         $client = new Client();

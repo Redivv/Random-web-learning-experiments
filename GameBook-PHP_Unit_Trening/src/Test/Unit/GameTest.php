@@ -2,8 +2,6 @@
 
 use PHPUnit\Framework\TestCase;
 
-require __DIR__ . '/../../Entity/Game.php';
-
 class GameTest extends TestCase
 {
     public function testImage_WithNull_ReturnPlaceholder()
@@ -87,8 +85,7 @@ class GameTest extends TestCase
                      ->getMock();
         $game->method('getAvarageScore')->willReturn(10);
 
-        $user = $this->getMockBuilder('lack')
-                     ->setMockClassName('User')
+        $user = $this->getMockBuilder(User::class)
                      ->setMethods(['getGenreCompatibility'])
                      ->getMock();
         $user->method('getGenreCompatibility')->willReturn(2);
@@ -103,8 +100,7 @@ class GameTest extends TestCase
                      ->getMock();
         $game->method('getAvarageScore')->willReturn(10);
 
-        $user = $this->getMockBuilder('lack')
-                     ->setMockClassName('User')
+        $user = $this->getMockBuilder(User::class)
                      ->setMethods(['getGenreCompatibility'])
                      ->getMock();
         $user->method('getGenreCompatibility')->willReturn(10);
