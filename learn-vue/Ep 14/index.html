@@ -14,7 +14,16 @@
 <body>
     
     <div id="root" class="container">
-        
+        <modal>
+            <template slot="header">Nagłówek</template>
+            <template slot="mainContent">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Earum expedita dolorum dicta, perspiciatis assumenda asperiores corrupti culpa? Quibusdam sit totam nemo magnam perspiciatis animi debitis ratione. Excepturi quas nesciunt sunt!
+            </template>
+            <template slot="footer">
+                <button class="button is-success">Save changes</button>
+                <button class="button">Cancel</button>
+            </template>
+        </modal>
     </div>
 
     <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
