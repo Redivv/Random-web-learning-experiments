@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .toggled{
+        background-color: red;
+    }
+</style>
+<body>
+    
+    <div id="root">
+        <!-- <button v-bind:title="title">Dawej tu</button> -->
+        <button :title="title">Dawej tu</button>
+        <br><br>
+        <button :class="{'toggled' : isToggled}" @click="clicked">Kliknij mie</button>
+    </div>
+
+    <div id="root2">
+        <h1>
+            {{ reversedMessage }}
+        </h1>
+
+
+        <button @click="addFailedTask">Add Failed Task</button>
+
+        <button @click="addCompletedTask">Add Completed Task</button>
+
+        <h1>All Tasks</h1>
+
+        <ul>
+            <li v-for="task in tasks">
+                {{task.desc}}
+            </li>
+        </ul>
+
+        <h1>Failed Tasks</h1>
+
+        <ul>
+            <li v-for="task in failedTasks">
+                {{task.desc}}
+            </li>
+        </ul>
+
+        <h1>Completed Tasks</h1>
+
+        <ul>
+            <li v-for="task in completedTasks">
+                {{task.desc}}
+            </li>
+        </ul>
+    </div>
+
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+
+
+    <script>
+        let app = new Vue({
+            el: "#root",
+            data: {
+                title: "lel",
+                isToggled: false
+            },
+
+            methods:{
+                clicked(){
+                    this.isToggled = !this.isToggled;
+                }
+            }
+        });
+        let app2 = new Vue({
+            el: "#root2",
+
+            data: {
+                message: "O cie chuj ale fane",
+                tasks: [
+                    {desc: "kek", completed: true},
+                    {desc: "das", completed: true},
+                    {desc: "czx", completed: false},
+                    {desc: "keczxczk", completed: true},
+                    {desc: "kqwfqek", completed: false},
+                ]
+            },
+
+            methods: {
+                addFailedTask(){
+                    this.tasks.push({
+                        desc: "New Failed Task",
+                        completed: false
+                    });
+                },
+
+                addCompletedTask(){
+                    this.tasks.push({
+                        desc: "New Completed Task",
+                        completed: true
+                    });
+                },
+            },
+
+            computed:{
+                reversedMessage(){
+                    return this.message.split('').reverse().join('');
+                },
+
+                failedTasks(){
+                    return this.tasks.filter( task => !task.completed );
+                },
+
+                completedTasks(){
+                    return this.tasks.filter( task => task.completed );
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="root">
+        <ul>
+            <li v-for="name in array">
+                {{name}}
+            </li>
+        </ul>
+
+        <input type="text" id="nameInput" v-model="newName">
+
+        <!-- <button v-on:click="addName">Dodaj Imię</button> -->
+
+        <button @click="addName">Dodaj Imię</button>
+    </div>
+
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+
+
+    <script>
+
+        let app = new Vue({
+            el: "#root",
+            data: {
+                newName: "",
+                array: ['kek','bek','lek'],
+            },
+
+            methods: {
+                addName() {
+                    this.array.push(this.newName);
+
+                    this.newName = "";
+                }
+            },
+
+            // mounted(){
+            //     document.querySelector('#button').addEventListener('click',() => {
+            //         let name = document.querySelector('#nameInput');
+
+            //         app.array.push(name.value);
+
+            //         name.value = '';
+            //     });
+            // }
+        });
+    </script>
+</body>
+</html>
