@@ -64,7 +64,7 @@
         </style>
     </head>
     <body>
-        <div id="app">
+        <div id="root">
             <ul>
                 <li v-for="skill in skills">@{{skill}}</li>
             </ul>

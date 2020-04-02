@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/projects/create', 'ProjectsController@create');
+
+Route::post('/projects', 'ProjectsController@store');
+
 Route::get('skills', function(){
     return ['kek','bek','lek','quek'];
 });
