@@ -2,11 +2,17 @@ let webpack = require('webpack');
 let path = require('path');
 
 module.exports = {
-    entry: './resources/js/app.js',
+    entry: './resources/assets/js/app.js',
 
     output:{
         path: path.resolve(__dirname, 'public/js'),
-        filename: 'bundle.js',
+        filename: 'app.js',
         publicPath: './public',
+    },
+
+    resolve:{
+        alias:{
+            'vue$': 'vue/disc/vue.common.js',
+        }
     }
 }
