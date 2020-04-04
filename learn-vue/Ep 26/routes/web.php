@@ -1,5 +1,6 @@
 <?php
 
+use App\Status;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/statuses', function(){
+    return Status::with('user')->latest()->get();
 });
