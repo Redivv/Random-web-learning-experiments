@@ -13,7 +13,7 @@
                         </p>
 
                         <p>
-                            Chwila temu
+                            {{status.created_at | ago | uppercase}}
                         </p>
                     </div>
 
@@ -26,6 +26,8 @@
 </template>
 
 <script>
+import moment from "moment";
+
 export default {
     data() {
         return {
@@ -33,9 +35,19 @@ export default {
         };
     },
 
+    filters:{
+        ago(timestamp){
+            return moment(timestamp).fromNow();
+        },
+
+        uppercase(string){
+            return string.toUpperCase();
+        }
+    },
+
     created(){
         axios.get('/statuses')
             .then(response => this.statuses = response.data);
-    }
+    },
 }
 </script>
