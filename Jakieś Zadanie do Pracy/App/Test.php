@@ -5,8 +5,14 @@
 
     class Test
     {
-        public static function kek(){
+        public static function kek()
+        {
             echo "kel";
+        }
+
+        public static function keo() : int
+        {
+            return 5;
         }
     }
 
