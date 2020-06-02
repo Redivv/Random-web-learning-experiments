@@ -7,7 +7,6 @@ use GuzzleHttp\Psr7\Response;
 
 class EurExchangeRateRequest
 {
-
     protected $httpClient;
 
     public function __construct(Client $httpClient)
@@ -17,10 +16,10 @@ class EurExchangeRateRequest
 
     public function fetchJson() : Response
     {
-        $response = $this->httpClient->request('GET','/api/exchangerates/rates/A/EUR',[
+        $response = $this->httpClient->request('GET', '/api/exchangerates/rates/A/EUR', [
             'headers' => [
-                'Accept' => 'application/json'
-            ]
+                'Accept' => 'application/json',
+            ],
         ]);
 
         return $response;
@@ -28,10 +27,10 @@ class EurExchangeRateRequest
 
     public function fetchXml() : Response
     {
-        $response = $this->httpClient->request('GET','/api/exchangerates/rates/A/EUR',[
+        $response = $this->httpClient->request('GET', '/api/exchangerates/rates/A/EUR', [
             'headers' => [
-                'Accept' => 'application/xml'
-            ]
+                'Accept' => 'application/xml',
+            ],
         ]);
 
         return $response;
